@@ -3,9 +3,13 @@ import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 import Header from '../components/Header';
+import { VerificationModal } from '../components/VerificationModal';
+import { useVerification } from '../providers/VerificationProvider';
 
-export const Route = createRootRoute({
-  component: () => (
+function RootComponent() {
+  const { currentVerifyingTap } = useVerification();
+
+  return (
     <div className='min-h-screen'>
       <Header />
 
@@ -13,8 +17,19 @@ export const Route = createRootRoute({
         <Outlet />
       </main>
 
+      {currentVerifyingTap && (
+        <VerificationModal 
+          tapId={currentVerifyingTap}
+          tapTitle={`Tap ${currentVerifyingTap}`}
+        />
+      )}
+
       <ReactQueryDevtools buttonPosition='top-right' />
       <TanStackRouterDevtools />
     </div>
-  ),
+  );
+}
+
+export const Route = createRootRoute({
+  component: RootComponent,
 });

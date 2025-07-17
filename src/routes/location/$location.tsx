@@ -57,7 +57,7 @@ function LocationPage() {
     <Container>
       <PaymentSuccessDialog location={location} beerTapsResponse={data} />
       <LocationHeader location={location} count={data.data.beerTaps.length} />
-      <BeerGrid beers={data.data.beerTaps} />
+      <BeerGrid beers={data} />
     </Container>
   );
 }

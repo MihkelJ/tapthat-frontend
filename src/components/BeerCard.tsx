@@ -1,17 +1,21 @@
 import PurchaseButton from '@/components/PurchaseButton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { BeerTap } from '@/types/beer';
+import { VerificationStatus } from '@/components/VerificationStatus';
+import type { PositiveResponse } from '@/lib/client';
 import ReactMarkdown from 'react-markdown';
 
 interface BeerCardProps {
-  beerTap: BeerTap['beerTaps'][number];
+  beerTap: PositiveResponse['get /v1/beer-taps']['data']['beerTaps'][number];
 }
 
 export default function BeerCard({ beerTap }: BeerCardProps) {
+  const requiresVerification = beerTap.identityVerification?.enabled;
+
   return (
     <Card className='h-full flex flex-col'>
       <CardHeader>
         <CardTitle className='text-lg'>{beerTap.title}</CardTitle>
+        {requiresVerification && <VerificationStatus tapId={beerTap.id!} showButton={false} size='sm' />}
       </CardHeader>
 
       <CardContent className='flex-1 flex flex-col gap-4'>
@@ -19,7 +23,7 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
           <ReactMarkdown>{beerTap.description}</ReactMarkdown>
         </div>
 
-        <div className='mt-auto'>
+        <div className='mt-auto space-y-2'>
           <PurchaseButton beerTap={beerTap} />
         </div>
       </CardContent>
