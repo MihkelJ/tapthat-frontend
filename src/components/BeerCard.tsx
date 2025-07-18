@@ -52,19 +52,19 @@ function getASCIIBadge(type: string): { badge: string; color: string } {
   }
 }
 
-function extractABVAndIBU(description: string): { abv: string; ibu: string } {
-  const abvMatch = description.match(/\*\*ABV:\s*([^*]+)\*\*/);
-  const ibuMatch = description.match(/\*\*IBU:\s*([^*]+)\*\*/);
+// function extractABVAndIBU(description: string): { abv: string; ibu: string } {
+//   const abvMatch = description.match(/\*\*ABV:\s*([^*]+)\*\*/);
+//   const ibuMatch = description.match(/\*\*IBU:\s*([^*]+)\*\*/);
 
-  return {
-    abv: abvMatch ? abvMatch[1].trim() : 'N/A',
-    ibu: ibuMatch ? ibuMatch[1].trim() : 'N/A',
-  };
-}
+//   return {
+//     abv: abvMatch ? abvMatch[1].trim() : 'N/A',
+//     ibu: ibuMatch ? ibuMatch[1].trim() : 'N/A',
+//   };
+// }
 
 export default function BeerCard({ beerTap }: BeerCardProps) {
   const filename = getTerminalFilename(beerTap.title);
-  const { abv, ibu } = extractABVAndIBU(beerTap.description);
+  // const { abv, ibu } = extractABVAndIBU(beerTap.description);
   const beerType = getBeerType(beerTap.title);
   const { badge, color } = getASCIIBadge(beerType);
 
