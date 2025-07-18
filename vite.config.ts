@@ -13,16 +13,4 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
-  optimizeDeps: {
-    exclude: ['@yodlpay/yapp-sdk'],
-    include: [],
-  },
-  ssr: {
-    noExternal: ['@yodlpay/yapp-sdk'],
-  },
-  build: {
-    commonjsOptions: {
-      include: [/@yodlpay\/yapp-sdk/, /node_modules/],
-    },
-  },
 });
