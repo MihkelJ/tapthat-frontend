@@ -19,7 +19,19 @@
 
 body {
   @apply m-0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -154,7 +166,7 @@ code {
     position: relative;
     overflow: hidden;
   }
-  
+
   .shimmer-effect::before {
     content: '';
     position: absolute;
@@ -162,16 +174,11 @@ code {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     animation: shimmer 3s infinite;
     z-index: 1;
   }
-  
+
   @keyframes shimmer {
     0% {
       left: -100%;
@@ -180,52 +187,66 @@ code {
       left: 100%;
     }
   }
-  
+
   .shake-on-load {
     animation: shake 0.8s ease-in-out;
   }
-  
+
   @keyframes shake {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0);
     }
-    10%, 30%, 50%, 70%, 90% {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
       transform: translateX(-3px);
     }
-    20%, 40%, 60%, 80% {
+    20%,
+    40%,
+    60%,
+    80% {
       transform: translateX(3px);
     }
   }
-  
+
   .computer-flicker {
     animation: flicker 2s infinite ease-in-out;
   }
-  
+
   @keyframes flicker {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
       opacity: 0.7;
     }
-    25%, 75% {
+    25%,
+    75% {
       opacity: 0.85;
     }
-    12.5%, 37.5%, 62.5%, 87.5% {
+    12.5%,
+    37.5%,
+    62.5%,
+    87.5% {
       opacity: 0.95;
     }
   }
-  
+
   .beer-bounce {
     animation: beer-bounce 2s ease-in-out infinite;
   }
-  
+
   .beer-foam {
     animation: foam-fizz 3s ease-in-out infinite;
   }
-  
+
   @keyframes beer-bounce {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px) rotate(0deg);
     }
     25% {
@@ -238,22 +259,24 @@ code {
       transform: translateY(-2px) rotate(-1deg);
     }
   }
-  
+
   @keyframes foam-fizz {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
       opacity: 0.6;
     }
   }
-  
+
   .coins-float {
     animation: coins-twinkle 2s ease-in-out infinite;
   }
-  
+
   @keyframes coins-twinkle {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.7;
       transform: scale(1);
     }
@@ -262,18 +285,19 @@ code {
       transform: scale(1.1);
     }
   }
-  
+
   .cursor-blink {
     animation: cursor-blink 1s ease-in-out infinite;
   }
-  
+
   @keyframes cursor-blink {
-    0%, 50% {
+    0%,
+    50% {
       opacity: 1;
     }
-    51%, 100% {
+    51%,
+    100% {
       opacity: 0;
     }
   }
 }
-
