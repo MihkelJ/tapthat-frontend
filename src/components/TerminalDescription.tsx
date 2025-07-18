@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
+
 interface TerminalDescriptionProps {
   command?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export function TerminalDescription({ 

@@ -37,7 +37,6 @@ type PostV1CallbackInput = {
     txHash: string;
     memo: string;
   };
-  txHash: string;
 };
 
 /** post /v1/callback */
