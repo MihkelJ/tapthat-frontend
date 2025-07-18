@@ -7,6 +7,7 @@ import {
 } from '@/lib/error-handling';
 import { useVerificationConfig, useVerificationMutation } from '@/lib/verification-hooks';
 import { useVerification } from '@/providers/VerificationProvider';
+import { getUniversalLink } from '@selfxyz/common';
 import { SelfAppBuilder, SelfQRcode } from '@selfxyz/qrcode';
 import { RefreshCw, Shield, Terminal, Zap } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
@@ -155,6 +156,18 @@ export function VerificationModal({ tapId, tapTitle, onVerificationComplete }: V
                 />
               )}
             </div>
+
+            {selfApp && (
+              <button
+                onClick={() => {
+                  const deepLinkUrl = getUniversalLink(selfApp);
+                  window.location.href = deepLinkUrl;
+                }}
+                className='font-mono bg-black border-2 border-green-700 text-green-400 hover:bg-green-900/30 hover:border-green-500 hover:text-green-300 transition-colors px-4 py-2 text-sm block sm:hidden'
+              >
+                OPEN SELF APP
+              </button>
+            )}
           </div>
         );
 
