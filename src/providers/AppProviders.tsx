@@ -4,6 +4,7 @@ import { StrictMode } from 'react';
 import { WagmiProvider } from 'wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { VerificationProvider } from './VerificationProvider';
+import { LocationProvider } from './LocationProvider';
 
 import { router } from '../router';
 import { wagmiConfig } from '../lib/wagmi';
@@ -21,7 +22,9 @@ export function AppProviders() {
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider>
             <VerificationProvider>
-              <RouterProvider router={router} />
+              <LocationProvider>
+                <RouterProvider router={router} />
+              </LocationProvider>
             </VerificationProvider>
           </RainbowKitProvider>
         </QueryClientProvider>

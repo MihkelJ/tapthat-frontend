@@ -5,9 +5,11 @@ import { TerminalDescription } from '@/components/TerminalDescription';
 import { TerminalHeader } from '@/components/TerminalHeader';
 import TerminalStatus from '@/components/TerminalStatus';
 import { fetchBeerTaps } from '@/lib/api';
+import { useLocation } from '@/hooks/useLocation';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
+import { useEffect } from 'react';
 
 export const Route = createFileRoute('/location/$location')({
   component: LocationPage,
@@ -15,11 +17,19 @@ export const Route = createFileRoute('/location/$location')({
 
 function LocationPage() {
   const { location } = Route.useParams();
+  const { addDiscoveredLocation } = useLocation();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['beerTaps', location],
     queryFn: () => fetchBeerTaps(location),
   });
+
+  // Unlock location when beers are found
+  useEffect(() => {
+    if (data && data.data.beerTaps.length > 0) {
+      addDiscoveredLocation(location, data.data.beerTaps.length);
+    }
+  }, [data, location, addDiscoveredLocation]);
 
   const LayoutWrapper = ({ children }: PropsWithChildren) => (
     <div className='min-h-screen bg-black text-green-400 font-mono'>
