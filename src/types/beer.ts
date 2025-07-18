@@ -1,5 +1,4 @@
 import type { Hex } from '@yodlpay/yapp-sdk';
-import type { VerificationRequirements } from './verification';
 
 export interface BeerTap {
   beerTaps: {
@@ -11,20 +10,7 @@ export interface BeerTap {
     transactionAmount: string;
     transactionMemo: string;
     transactionReceiverEns: string;
-    identityVerification?: VerificationRequirements;
   }[];
-}
-
-export interface BeerTapItem {
-  id: string;
-  title: string;
-  location: string;
-  description: string;
-  transactionCurrency: string;
-  transactionAmount: string;
-  transactionMemo: string;
-  transactionReceiverEns: string;
-  identityVerification?: VerificationRequirements;
 }
 
 export interface StatusResponse {

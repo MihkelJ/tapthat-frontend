@@ -1,81 +1,24 @@
-import type { VerificationRequest } from '@/types/verification';
+import type { BeerTap, ServerResponse, StatusResponse } from '@/types/beer';
 import type { Hex } from '@yodlpay/yapp-sdk';
-import { Client } from './client';
 
-const client = new Client();
+const API_BASE_URL = 'https://yodl-store-webhook.fly.dev/v1';
 
-export async function fetchBeerTaps(location: string) {
-  const response = await client.provide('get /v1/beer-taps', { location });
+export async function fetchBeerTaps(location: string): Promise<ServerResponse<BeerTap>> {
+  const response = await fetch(`${API_BASE_URL}/beer-taps?location=${encodeURIComponent(location)}`);
 
-  if (response.status === 'error') {
-    throw new Error(response.error.message);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch beer taps: ${response.status} ${response.statusText}`);
   }
 
-  return response;
+  return response.json();
 }
 
-export async function fetchStatus(txHash: Hex) {
-  const response = await client.provide('get /v1/status/:txHash', { txHash });
+export async function fetchStatus(txHash: Hex): Promise<ServerResponse<StatusResponse>> {
+  const response = await fetch(`${API_BASE_URL}/status/${txHash}`);
 
-  if (response.status === 'error') {
-    throw new Error(response.error.message);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch status: ${response.status} ${response.statusText}`);
   }
 
-  return response;
-}
-
-// Verification API endpoints
-export async function getVerificationConfig(tapId: string, walletAddress: string) {
-  const response = await client.provide('post /v1/identity/config', { tapId, walletAddress });
-
-  if (response.status === 'error') {
-    throw new Error(response.error.message);
-  }
-
-  return response;
-}
-
-export async function verifyIdentity(request: VerificationRequest) {
-  const response = await client.provide('post /v1/identity/verify', request);
-
-  if (response.status === 'error') {
-    throw new Error(response.error.message);
-  }
-
-  return response;
-}
-
-export async function checkVerificationStatus(tapId: string, walletAddress: string) {
-  const response = await client.provide('get /v1/identity/status/:walletAddress/:tapId', {
-    tapId,
-    walletAddress,
-  });
-
-  if (response.status === 'error') {
-    throw new Error(response.error.message);
-  }
-
-  return response;
-}
-
-export async function checkMultipleTapsStatus(tapIds: string[], walletAddress: string) {
-  const statusPromises = tapIds.map(async tapId => {
-    try {
-      const status = await checkVerificationStatus(tapId, walletAddress);
-      return {
-        tapId,
-        isVerified: status.data.isVerified,
-        result: status.data.result,
-        error: status.data.error,
-      };
-    } catch (error) {
-      return {
-        tapId,
-        isVerified: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      };
-    }
-  });
-
-  return Promise.all(statusPromises);
+  return response.json();
 }
