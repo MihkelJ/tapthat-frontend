@@ -7,7 +7,10 @@ interface BeerCardProps {
 }
 
 function getTerminalFilename(title: string): string {
-  return title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
 }
 
 function getBeerType(title: string): string {
@@ -24,27 +27,27 @@ function getASCIIBadge(type: string): { badge: string; color: string } {
     case 'IPA':
       return {
         badge: '┌─────┐\n│ IPA │\n└─────┘',
-        color: 'text-orange-400'
+        color: 'text-orange-400',
       };
     case 'LAGER':
       return {
         badge: '┌───────┐\n│ LAGER │\n└───────┘',
-        color: 'text-yellow-400'
+        color: 'text-yellow-400',
       };
     case 'STOUT':
       return {
         badge: '┌───────┐\n│ STOUT │\n└───────┘',
-        color: 'text-gray-300'
+        color: 'text-gray-300',
       };
     case 'WHEAT':
       return {
         badge: '┌───────┐\n│ WHEAT │\n└───────┘',
-        color: 'text-amber-400'
+        color: 'text-amber-400',
       };
     default:
       return {
         badge: '┌──────┐\n│ BEER │\n└──────┘',
-        color: 'text-green-400'
+        color: 'text-green-400',
       };
   }
 }
@@ -52,10 +55,10 @@ function getASCIIBadge(type: string): { badge: string; color: string } {
 function extractABVAndIBU(description: string): { abv: string; ibu: string } {
   const abvMatch = description.match(/\*\*ABV:\s*([^*]+)\*\*/);
   const ibuMatch = description.match(/\*\*IBU:\s*([^*]+)\*\*/);
-  
+
   return {
     abv: abvMatch ? abvMatch[1].trim() : 'N/A',
-    ibu: ibuMatch ? ibuMatch[1].trim() : 'N/A'
+    ibu: ibuMatch ? ibuMatch[1].trim() : 'N/A',
   };
 }
 
@@ -69,9 +72,7 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
     <div className='relative h-full flex flex-col border-2 border-green-700 bg-black p-4 font-mono'>
       {/* Terminal Header */}
       <div className='mb-4'>
-        <div className='text-green-300 text-xs sm:text-sm mb-2'>
-          $ cat beer_{filename}.txt
-        </div>
+        <div className='text-green-300 text-xs sm:text-sm mb-2'>$ cat beer_{filename}.txt</div>
         <div className='border-b border-green-700 mb-3'></div>
       </div>
 
@@ -80,9 +81,7 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
         <div className='text-green-400 text-xl sm:text-2xl font-bold tracking-wide flex-1'>
           {beerTap.title.toUpperCase()}
         </div>
-        <div className={`text-xs leading-tight whitespace-pre font-mono ml-4 ${color}`}>
-          {badge}
-        </div>
+        <div className={`text-xs leading-tight whitespace-pre font-mono ml-4 ${color}`}>{badge}</div>
       </div>
 
       {/* Terminal Data Readouts */}
@@ -97,21 +96,23 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
         </div>
         <div className='flex'>
           <span className='text-green-300 w-16'>PRICE:</span>
-          <span className='text-yellow-400'>{beerTap.transactionCurrency} {beerTap.transactionAmount}</span>
+          <span className='text-yellow-400'>
+            {beerTap.transactionCurrency} {beerTap.transactionAmount}
+          </span>
         </div>
       </div>
 
       {/* Description */}
       <div className='flex-1 mb-4'>
-        <div className='text-green-300 text-xs sm:text-sm mb-2'>
-          # Description:
-        </div>
-        <div className='text-green-400 text-xs sm:text-sm leading-relaxed prose prose-sm prose-green max-w-none 
+        <div className='text-green-300 text-xs sm:text-sm mb-2'># Description:</div>
+        <div
+          className='text-green-400 text-xs sm:text-sm leading-relaxed prose prose-sm prose-green max-w-none 
                         prose-headings:text-green-400 prose-headings:font-bold prose-headings:text-xs
                         prose-p:text-green-400 prose-p:text-xs prose-p:my-1
                         prose-strong:text-white prose-strong:font-bold
                         prose-ul:text-green-400 prose-ul:text-xs prose-ul:my-1 prose-ul:list-none prose-ul:pl-0
-                        prose-li:text-green-400 prose-li:text-xs prose-li:my-0 prose-li:before:content-["-"] prose-li:before:mr-2 prose-li:before:text-green-400'>
+                        prose-li:text-green-400 prose-li:text-xs prose-li:my-0 prose-li:before:content-["-"] prose-li:before:mr-2 prose-li:before:text-green-400'
+        >
           <ReactMarkdown>{beerTap.description}</ReactMarkdown>
         </div>
       </div>

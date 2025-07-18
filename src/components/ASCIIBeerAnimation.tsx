@@ -13,7 +13,7 @@ const beerFrames = [
  █████ █
  ██████
  █████`,
-  
+
   // Frame 2 - Tilted right
   `  ▒▒▒▒▒
  ███████
@@ -22,7 +22,7 @@ const beerFrames = [
  ██ ████
  ██████
  █████`,
-  
+
   // Frame 3 - More tilted
   `  ▓▓▓▓▓
  ███████
@@ -31,7 +31,7 @@ const beerFrames = [
  ████ ██
  ██████
  █████`,
-  
+
   // Frame 4 - Tilted left
   `  ▒▒▒▒▒
  ███████
@@ -80,4 +80,4 @@ export default function ASCIIBeerAnimation({ onComplete }: ASCIIBeerAnimationPro
       </div>
     </div>
   );
-} 
+}
