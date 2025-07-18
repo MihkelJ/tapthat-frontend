@@ -42,7 +42,7 @@ const beerFrames = [
  █████`,
 ];
 
-export default function ASCIIBeerAnimation({ onComplete }: ASCIIBeerAnimationProps) {
+export default function ASCIIBeerAnimation({ onComplete: _onComplete }: ASCIIBeerAnimationProps) {
   const [currentFrame, setCurrentFrame] = useState(0);
 
   useEffect(() => {
