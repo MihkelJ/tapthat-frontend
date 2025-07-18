@@ -39,7 +39,7 @@ export async function verifyIdentity(request: VerificationRequest) {
   const response = await client.provide('post /v1/identity/verify', request);
 
   if (response.status === 'error') {
-    throw new Error(response.error.message);
+    throw new Error(response.error);
   }
 
   return response;
