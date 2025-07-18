@@ -6,11 +6,11 @@ import { useMemo, useState } from 'react';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { fetchStatus } from '@/lib/api';
-import type { BeerTap, ServerResponse } from '@/types/beer';
+import type { PositiveResponse } from '@/lib/client';
 
 interface PaymentSuccessDialogProps {
   location: string;
-  beerTapsResponse: ServerResponse<BeerTap>;
+  beerTapsResponse: PositiveResponse['get /v1/beer-taps'];
 }
 
 export default function PaymentSuccessDialog({ location, beerTapsResponse }: PaymentSuccessDialogProps) {

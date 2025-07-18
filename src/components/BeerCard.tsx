@@ -1,9 +1,9 @@
 import PurchaseButton from '@/components/PurchaseButton';
-import type { BeerTap } from '@/types/beer';
+import type { PositiveResponse } from '@/lib/client.ts';
 import ReactMarkdown from 'react-markdown';
 
 interface BeerCardProps {
-  beerTap: BeerTap['beerTaps'][number];
+  beerTap: PositiveResponse['get /v1/beer-taps']['data']['beerTaps'][number];
 }
 
 function getTerminalFilename(title: string): string {
@@ -22,33 +22,18 @@ function getBeerType(title: string): string {
   return 'BEER';
 }
 
-function getASCIIBadge(type: string): { badge: string; color: string } {
+function getBeerTypeColor(type: string): string {
   switch (type) {
     case 'IPA':
-      return {
-        badge: '┌─────┐\n│ IPA │\n└─────┘',
-        color: 'text-orange-400',
-      };
+      return 'text-orange-400';
     case 'LAGER':
-      return {
-        badge: '┌───────┐\n│ LAGER │\n└───────┘',
-        color: 'text-yellow-400',
-      };
+      return 'text-yellow-400';
     case 'STOUT':
-      return {
-        badge: '┌───────┐\n│ STOUT │\n└───────┘',
-        color: 'text-gray-300',
-      };
+      return 'text-gray-300';
     case 'WHEAT':
-      return {
-        badge: '┌───────┐\n│ WHEAT │\n└───────┘',
-        color: 'text-amber-400',
-      };
+      return 'text-amber-400';
     default:
-      return {
-        badge: '┌──────┐\n│ BEER │\n└──────┘',
-        color: 'text-green-400',
-      };
+      return 'text-green-400';
   }
 }
 
@@ -66,7 +51,7 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
   const filename = getTerminalFilename(beerTap.title);
   // const { abv, ibu } = extractABVAndIBU(beerTap.description);
   const beerType = getBeerType(beerTap.title);
-  const { badge, color } = getASCIIBadge(beerType);
+  const color = getBeerTypeColor(beerType);
 
   return (
     <div className='relative h-full flex flex-col border-2 border-green-700 bg-black p-4 font-mono'>
@@ -81,7 +66,7 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
         <div className='text-green-400 text-xl sm:text-2xl font-bold tracking-wide flex-1'>
           {beerTap.title.toUpperCase()}
         </div>
-        <div className={`text-xs leading-tight whitespace-pre font-mono ml-4 ${color}`}>{badge}</div>
+        <div className={`text-xs px-2 py-1 border border-dashed border-current ml-4 ${color}`}>{beerType}</div>
       </div>
 
       {/* Terminal Data Readouts - TODO: Add back in */}
