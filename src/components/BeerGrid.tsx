@@ -1,8 +1,8 @@
 import BeerCard from '@/components/BeerCard';
-import type { BeerTap } from '@/types/beer';
+import type { PositiveResponse } from '@/lib/client.ts';
 
 interface BeerGridProps {
-  beers: BeerTap['beerTaps'];
+  beers: PositiveResponse['get /v1/beer-taps']['data']['beerTaps'];
 }
 
 export default function BeerGrid({ beers }: BeerGridProps) {

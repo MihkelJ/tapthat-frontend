@@ -1,9 +1,9 @@
 import PurchaseButton from '@/components/PurchaseButton';
-import type { BeerTap } from '@/types/beer';
+import type { PositiveResponse } from '@/lib/client.ts';
 import ReactMarkdown from 'react-markdown';
 
 interface BeerCardProps {
-  beerTap: BeerTap['beerTaps'][number];
+  beerTap: PositiveResponse['get /v1/beer-taps']['data']['beerTaps'][number];
 }
 
 function getTerminalFilename(title: string): string {
