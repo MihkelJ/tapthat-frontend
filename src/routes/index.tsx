@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -68,14 +68,14 @@ function App() {
         <div className='w-full'>
           <div className='text-green-300 mb-4 text-xs sm:text-sm'>Available commands:</div>
           <div className='space-y-4 max-w-full sm:max-w-md'>
-            <Link to='/location/$location' params={{ location: 'demo' }}>
-              <div className='mb-4 hover:bg-green-900/20 p-3 rounded border border-green-700 hover:border-green-500 transition-colors cursor-pointer'>
-                <div className='text-xs sm:text-sm'>
-                  <span className='text-green-400'>$</span> <span className='text-white'>view_locations</span>
-                </div>
-                <div className='text-xs text-green-600 ml-2 sm:ml-4 mt-1'>Access available tap locations</div>
+            <div className='mb-4 p-3 rounded border border-green-700 bg-green-950/40 opacity-60 cursor-not-allowed select-none'>
+              <div className='text-xs sm:text-sm flex items-center gap-2'>
+                <span className='text-green-400'>$</span>
+                <span className='text-white line-through'>view_locations</span>
+                <span className='text-yellow-400 text-[10px] sm:text-xs font-mono'>(disabled)</span>
               </div>
-            </Link>
+              <div className='text-xs text-green-600 ml-2 sm:ml-4 mt-1'>Try to find your nearest tap location!</div>
+            </div>
 
             <div className='hover:bg-green-900/20 p-3 rounded border border-green-700 hover:border-green-500 transition-colors cursor-pointer'>
               <div className='text-xs sm:text-sm'>

@@ -6,7 +6,12 @@ interface LocationHeaderProps {
 export default function LocationHeader({ location, count }: LocationHeaderProps) {
   return (
     <div className='mb-8 w-full'>
-      {/* Terminal location info */}
+      <div className='mb-6 text-left w-full'>
+        <div className='text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wider text-green-400 py-4 font-retro'>
+          {location.toUpperCase()} BEER TERMINAL<span className='cursor-blink'>_</span>
+        </div>
+      </div>
+
       <div className='mb-6 space-y-2 text-xs sm:text-sm'>
         <div className='flex flex-row gap-1 sm:gap-2 overflow-hidden'>
           <span className='text-green-300'>LOCATION:</span>
