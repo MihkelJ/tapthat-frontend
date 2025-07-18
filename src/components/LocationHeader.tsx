@@ -32,9 +32,15 @@ export default function LocationHeader({ location, count }: LocationHeaderProps)
       <div className='mb-6 text-green-400 w-full'>
         <div className='text-green-300 mb-2 text-xs sm:text-sm'>$ cat {location}_beer_taps.txt</div>
         <div className='pl-2 border-l-2 border-green-700 text-xs sm:text-sm leading-relaxed'>
-          {count === 0
-            ? `No beer taps currently available at ${location.toUpperCase()}.`
-            : `Found ${count} beer tap${count === 1 ? '' : 's'} at ${location.toUpperCase()} location.<br/>Ready for crypto payment transactions.`}
+          {count === 0 ? (
+            <>No beer taps currently available at {location.toUpperCase()}.</>
+          ) : (
+            <>
+              Found {count} beer tap{count === 1 ? '' : 's'} at {location.toUpperCase()} location.
+              <br />
+              Ready for crypto payment transactions.
+            </>
+          )}
         </div>
       </div>
     </div>

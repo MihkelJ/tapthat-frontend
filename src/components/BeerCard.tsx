@@ -84,8 +84,8 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
         <div className={`text-xs leading-tight whitespace-pre font-mono ml-4 ${color}`}>{badge}</div>
       </div>
 
-      {/* Terminal Data Readouts */}
-      <div className='mb-4 space-y-1 text-xs sm:text-sm'>
+      {/* Terminal Data Readouts - TODO: Add back in */}
+      {/* <div className='mb-4 space-y-1 text-xs sm:text-sm'>
         <div className='flex'>
           <span className='text-green-300 w-16'>ABV:</span>
           <span className='text-white'>{abv}</span>
@@ -100,13 +100,13 @@ export default function BeerCard({ beerTap }: BeerCardProps) {
             {beerTap.transactionCurrency} {beerTap.transactionAmount}
           </span>
         </div>
-      </div>
+      </div> */}
 
       {/* Description */}
       <div className='flex-1 mb-4'>
         <div className='text-green-300 text-xs sm:text-sm mb-2'># Description:</div>
         <div
-          className='text-green-400 text-xs sm:text-sm leading-relaxed prose prose-sm prose-green max-w-none 
+          className='text-green-400 text-xs sm:text-sm leading-relaxed prose prose-sm prose-green max-w-none
                         prose-headings:text-green-400 prose-headings:font-bold prose-headings:text-xs
                         prose-p:text-green-400 prose-p:text-xs prose-p:my-1
                         prose-strong:text-white prose-strong:font-bold
