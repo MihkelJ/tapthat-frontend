@@ -9,7 +9,7 @@ export const Route = createRootRoute({
     <div className='min-h-screen'>
       <Header />
 
-      <main className='pt-20'>
+      <main className='pt-16'>
         <Outlet />
       </main>
 
