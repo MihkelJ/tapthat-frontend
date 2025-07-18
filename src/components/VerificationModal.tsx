@@ -158,15 +158,14 @@ export function VerificationModal({ tapId, tapTitle, onVerificationComplete }: V
             </div>
 
             {selfApp && (
-              <button
-                onClick={() => {
-                  const deepLinkUrl = getUniversalLink(selfApp);
-                  window.location.href = deepLinkUrl;
-                }}
-                className='font-mono bg-black border-2 border-green-700 text-green-400 hover:bg-green-900/30 hover:border-green-500 hover:text-green-300 transition-colors px-4 py-2 text-sm block sm:hidden'
+              <a
+                href={getUniversalLink(selfApp)}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-mono bg-black border-2 border-green-700 text-green-400 hover:bg-green-900/30 hover:border-green-500 hover:text-green-300 transition-colors px-4 py-2 text-sm block sm:hidden text-center'
               >
                 OPEN SELF APP
-              </button>
+              </a>
             )}
           </div>
         );
