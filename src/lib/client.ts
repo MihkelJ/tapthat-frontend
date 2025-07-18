@@ -1,9 +1,7 @@
 type SomeOf<T> = T[keyof T];
 
 /** get /v1/health */
-type GetV1HealthInput = {
-  tapId: string;
-};
+type GetV1HealthInput = {};
 
 /** get /v1/health */
 type GetV1HealthPositiveVariant1 = {
@@ -39,6 +37,7 @@ type PostV1CallbackInput = {
     txHash: string;
     memo: string;
   };
+  txHash: string;
 };
 
 /** post /v1/callback */
@@ -94,7 +93,7 @@ type GetV1BeerTapsPositiveVariant1 = {
             ofacCheck: boolean;
           }
         | undefined;
-      identityVerification?: unknown | undefined;
+      identityVerification?: any | undefined;
     }[];
   };
 };
@@ -151,41 +150,12 @@ interface GetV1StatusTxHashNegativeResponseVariants {
 }
 
 /** post /v1/identity/verify */
-type PostV1IdentityVerifyInput = {
-  attestationId?: (1 | 2) | unknown;
-  /** VcAndDiscloseProof from Self.xyz */
-  proof?:
-    | {
-        a: [string, string];
-        b: [[string, string], [string, string]];
-        c: [string, string];
-      }
-    | unknown;
-  /** Array of BigNumberish public signals from Self.xyz proof */
-  pubSignals?: string[] | unknown;
-  userContextData?: string | unknown;
-};
+type PostV1IdentityVerifyInput = {};
 
 /** post /v1/identity/verify */
 type PostV1IdentityVerifyPositiveVariant1 = {
   status: 'success';
-  data: {
-    isVerified: boolean;
-    result?:
-      | {
-          isValid: boolean;
-          isAgeValid: boolean;
-          isOfacValid: boolean;
-          nationality?: string | undefined;
-          userIdentifier: string;
-          attestationId: number;
-          verifiedAt: number;
-          expiresAt: number;
-        }
-      | undefined;
-    error?: string | undefined;
-    cachedAt?: number | undefined;
-  };
+  result: boolean;
 };
 
 /** post /v1/identity/verify */
@@ -196,14 +166,13 @@ interface PostV1IdentityVerifyPositiveResponseVariants {
 /** post /v1/identity/verify */
 type PostV1IdentityVerifyNegativeVariant1 = {
   status: 'error';
-  error: {
-    message: string;
-  };
+  error: string;
 };
 
 /** post /v1/identity/verify */
 interface PostV1IdentityVerifyNegativeResponseVariants {
   400: PostV1IdentityVerifyNegativeVariant1;
+  500: PostV1IdentityVerifyNegativeVariant1;
 }
 
 /** post /v1/identity/config */
@@ -237,7 +206,7 @@ type PostV1IdentityConfigPositiveVariant1 = {
               gender?: boolean | undefined;
               expiry_date?: boolean | undefined;
               ofac?: boolean | undefined;
-              excludedCountries?: unknown[] | undefined;
+              excludedCountries?: any[] | undefined;
               minimumAge?: number | undefined;
             }
           | undefined
@@ -395,7 +364,7 @@ export const endpointTags = {
 
 const parseRequest = (request: string) => request.split(/ (.+)/, 2) as [Method, Path];
 
-const substitute = (path: string, params: Record<string, unknown>) => {
+const substitute = (path: string, params: Record<string, any>) => {
   const rest = { ...params };
   for (const key in params) {
     path = path.replace(`:${key}`, () => {
@@ -406,7 +375,7 @@ const substitute = (path: string, params: Record<string, unknown>) => {
   return [path, rest] as const;
 };
 
-export type Implementation = (method: Method, path: string, params: Record<string, unknown>) => Promise<unknown>;
+export type Implementation = (method: Method, path: string, params: Record<string, any>) => Promise<any>;
 
 const defaultImplementation: Implementation = async (method, path, params) => {
   const hasBody = !['get', 'delete'].includes(method);

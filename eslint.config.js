@@ -84,6 +84,6 @@ export default [
     },
   },
   {
-    ignores: ['dist/', 'node_modules/', '*.config.js', '*.config.ts', 'vite.config.*'],
+    ignores: ['dist/', 'node_modules/', '*.config.js', '*.config.ts', 'vite.config.*', 'src/lib/client.ts'],
   },
 ];
