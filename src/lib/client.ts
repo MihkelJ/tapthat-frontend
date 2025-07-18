@@ -1,7 +1,9 @@
 type SomeOf<T> = T[keyof T];
 
 /** get /v1/health */
-type GetV1HealthInput = {};
+type GetV1HealthInput = {
+  tapId: string;
+};
 
 /** get /v1/health */
 type GetV1HealthPositiveVariant1 = {
@@ -92,7 +94,7 @@ type GetV1BeerTapsPositiveVariant1 = {
             ofacCheck: boolean;
           }
         | undefined;
-      identityVerification?: any | undefined;
+      identityVerification?: unknown | undefined;
     }[];
   };
 };
@@ -150,7 +152,7 @@ interface GetV1StatusTxHashNegativeResponseVariants {
 
 /** post /v1/identity/verify */
 type PostV1IdentityVerifyInput = {
-  attestationId?: (1 | 2) | any;
+  attestationId?: (1 | 2) | unknown;
   /** VcAndDiscloseProof from Self.xyz */
   proof?:
     | {
@@ -158,10 +160,10 @@ type PostV1IdentityVerifyInput = {
         b: [[string, string], [string, string]];
         c: [string, string];
       }
-    | any;
+    | unknown;
   /** Array of BigNumberish public signals from Self.xyz proof */
-  pubSignals?: string[] | any;
-  userContextData?: string | any;
+  pubSignals?: string[] | unknown;
+  userContextData?: string | unknown;
 };
 
 /** post /v1/identity/verify */
@@ -235,7 +237,7 @@ type PostV1IdentityConfigPositiveVariant1 = {
               gender?: boolean | undefined;
               expiry_date?: boolean | undefined;
               ofac?: boolean | undefined;
-              excludedCountries?: any[] | undefined;
+              excludedCountries?: unknown[] | undefined;
               minimumAge?: number | undefined;
             }
           | undefined
@@ -393,7 +395,7 @@ export const endpointTags = {
 
 const parseRequest = (request: string) => request.split(/ (.+)/, 2) as [Method, Path];
 
-const substitute = (path: string, params: Record<string, any>) => {
+const substitute = (path: string, params: Record<string, unknown>) => {
   const rest = { ...params };
   for (const key in params) {
     path = path.replace(`:${key}`, () => {
@@ -404,7 +406,7 @@ const substitute = (path: string, params: Record<string, any>) => {
   return [path, rest] as const;
 };
 
-export type Implementation = (method: Method, path: string, params: Record<string, any>) => Promise<any>;
+export type Implementation = (method: Method, path: string, params: Record<string, unknown>) => Promise<unknown>;
 
 const defaultImplementation: Implementation = async (method, path, params) => {
   const hasBody = !['get', 'delete'].includes(method);

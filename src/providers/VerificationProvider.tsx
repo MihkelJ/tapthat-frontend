@@ -12,6 +12,7 @@ interface VerificationContextType {
 
 const VerificationContext = createContext<VerificationContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useVerification() {
   const context = useContext(VerificationContext);
   if (!context) {
