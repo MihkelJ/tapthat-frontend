@@ -51,7 +51,7 @@ function LocationPage() {
             Failed to load beer taps
           </div>
           <div className='text-xl sm:text-2xl text-green-600 font-bold'>
-            {true ? error.message : 'Unknown error occurred'}
+            {error instanceof Error ? error.message : 'Unknown error occurred'}
           </div>
         </div>
       </LayoutWrapper>
