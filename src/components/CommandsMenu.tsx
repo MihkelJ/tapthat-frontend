@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useLocation } from '@/hooks/useLocation';
+import { useState } from 'react';
 import { LocationSelector } from './LocationSelector';
 
 export function CommandsMenu() {
@@ -10,7 +10,7 @@ export function CommandsMenu() {
       <div className='text-green-300 mb-4 text-xs sm:text-sm'>Available commands:</div>
       <div className='space-y-4 max-w-full sm:max-w-md'>
         {isLocationUnlocked ? (
-          <div 
+          <div
             className='mb-4 p-3 rounded border border-green-700 bg-green-950/40 hover:bg-green-900/40 hover:border-green-500 transition-colors cursor-pointer'
             onClick={() => setShowLocationSelector(true)}
           >
@@ -41,10 +41,8 @@ export function CommandsMenu() {
 
         <div className='text-purple-400 text-xs mt-2'>powered by yodl</div>
       </div>
-      
-      {showLocationSelector && (
-        <LocationSelector onClose={() => setShowLocationSelector(false)} />
-      )}
+
+      {showLocationSelector && <LocationSelector onClose={() => setShowLocationSelector(false)} />}
     </div>
   );
 }

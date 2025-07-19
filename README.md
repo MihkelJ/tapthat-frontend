@@ -1,4 +1,4 @@
-# 🍺 Yodl Beer Frontend
+# 🍺 TapThat Frontend
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -25,14 +25,14 @@
 | ![TanStack](https://img.shields.io/badge/TanStack-FF4154?style=flat&logo=react-query&logoColor=white)      | Router & Query for data fetching |
 | ![Tailwind](https://img.shields.io/badge/Tailwind_4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white) | Modern styling system            |
 | ![Shadcn](https://img.shields.io/badge/Shadcn/ui-000000?style=flat&logo=shadcnui&logoColor=white)          | Beautiful UI components          |
-| ![Yodl](https://img.shields.io/badge/Yodl_Pay-4A90E2?style=flat&logo=ethereum&logoColor=white)             | Crypto payment integration       |
+| ![TapThat](https://img.shields.io/badge/TapThat_Pay-4A90E2?style=flat&logo=ethereum&logoColor=white)       | Crypto payment integration       |
 
 ## 🚀 Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/MihkelJ/yodl-beer-frontend.git
-cd yodl-beer-frontend
+git clone https://github.com/MihkelJ/tapthat-frontend.git
+cd tapthat-frontend
 
 # Install dependencies
 pnpm install
