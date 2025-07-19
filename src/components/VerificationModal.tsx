@@ -36,9 +36,13 @@ export function VerificationModal({ tapId, tapTitle, onVerificationComplete }: V
       return null;
     }
 
+    const { userDefinedData, ...rest } = configQuery.data.data;
+
+    console.log(userDefinedData);
+
     try {
       return new SelfAppBuilder({
-        ...configQuery.data.data,
+        ...rest,
       }).build();
     } catch (error) {
       console.error(error);
