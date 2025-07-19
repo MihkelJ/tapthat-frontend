@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { LocationContext, type DiscoveredLocation, type LocationContextType } from '@/contexts/LocationContext';
 
 const STORAGE_KEY = 'tapthat-location-state';
@@ -33,7 +33,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     }
   }, [discoveredLocations]);
 
-  const addDiscoveredLocation = (location: string, beerCount: number) => {
+  const addDiscoveredLocation = useCallback((location: string, beerCount: number) => {
     setDiscoveredLocations((prev) => {
       // Check if location already exists
       const existingIndex = prev.findIndex((loc) => loc.name === location);
@@ -59,11 +59,11 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         ];
       }
     });
-  };
+  }, []);
 
-  const clearDiscoveredLocations = () => {
+  const clearDiscoveredLocations = useCallback(() => {
     setDiscoveredLocations([]);
-  };
+  }, []);
 
   const isLocationUnlocked = discoveredLocations.length > 0;
 

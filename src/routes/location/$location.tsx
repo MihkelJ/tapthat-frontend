@@ -9,7 +9,7 @@ import { useLocation } from '@/hooks/useLocation';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const Route = createFileRoute('/location/$location')({
   component: LocationPage,
@@ -18,6 +18,7 @@ export const Route = createFileRoute('/location/$location')({
 function LocationPage() {
   const { location } = Route.useParams();
   const { addDiscoveredLocation } = useLocation();
+  const hasProcessedLocation = useRef(false);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['beerTaps', location],
@@ -26,10 +27,16 @@ function LocationPage() {
 
   // Unlock location when beers are found
   useEffect(() => {
-    if (data && data.data.beerTaps.length > 0) {
+    if (data && data.data.beerTaps.length > 0 && !hasProcessedLocation.current) {
       addDiscoveredLocation(location, data.data.beerTaps.length);
+      hasProcessedLocation.current = true;
     }
   }, [data, location, addDiscoveredLocation]);
+
+  // Reset processed flag when location changes
+  useEffect(() => {
+    hasProcessedLocation.current = false;
+  }, [location]);
 
   const LayoutWrapper = ({ children }: PropsWithChildren) => (
     <div className='min-h-screen bg-black text-green-400 font-mono'>
