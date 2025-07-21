@@ -4,8 +4,8 @@ import { TapThatLogo } from '@/components/TapThatLogo';
 import { TerminalDescription } from '@/components/TerminalDescription';
 import { TerminalHeader } from '@/components/TerminalHeader';
 import TerminalStatus from '@/components/TerminalStatus';
-import { fetchBeerTaps } from '@/lib/api';
 import { useLocation } from '@/hooks/useLocation';
+import { fetchBeerTaps } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
@@ -22,7 +22,11 @@ function LocationPage() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['beerTaps', location],
-    queryFn: () => fetchBeerTaps(location),
+    queryFn: async () => {
+      const result = await fetchBeerTaps(location);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      return result;
+    },
   });
 
   // Unlock location when beers are found
