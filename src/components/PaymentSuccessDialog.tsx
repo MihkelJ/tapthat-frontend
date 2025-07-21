@@ -16,7 +16,6 @@ interface PaymentSuccessDialogProps {
 export default function PaymentSuccessDialog({ location, beerTapsResponse }: PaymentSuccessDialogProps) {
   const search = useSearch({ strict: false }) as { txHash?: string };
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
   const txHash = search.txHash;
@@ -42,12 +41,10 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
       throw new Error('Payment amount or currency does not match beer tap requirements');
     }
 
-    setIsOpen(true);
     return payment;
   };
 
   const {
-    data: payment,
     isLoading,
     error,
     refetch: retryPaymentValidation,
@@ -68,7 +65,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
     refetchInterval: query => {
       const data = query.state.data;
       const isTerminalState = data?.status === 'completed' || data?.status === 'failed';
-      return isTerminalState ? false : 1000;
+      return isTerminalState ? false : 500;
     },
   });
 
@@ -85,7 +82,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
       case 'failed':
         return 'ACCESS DENIED - PAYMENT FAILED';
       default:
-        return 'STATUS: UNKNOWN PROCESS';
+        return 'STATUS: BOOTING...';
     }
   }, [statusResponse]);
 
@@ -102,18 +99,11 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
       case 'processing':
         return `[PROCESSING] Beer.exe running at ${location.toUpperCase()} node. Compilation in progress...`;
       default:
-        return `[STATUS] Unknown process state at ${location.toUpperCase()} terminal. Monitoring...`;
+        return `[BOOTING] Initializing payment protocol at ${location.toUpperCase()} terminal...`;
     }
   }, [statusResponse, location]);
 
-  const shouldShowDialog = !!txHash && (isLoading || error || (payment && statusResponse));
-
-  if (!shouldShowDialog) {
-    return null;
-  }
-
   const handleClose = () => {
-    setIsOpen(false);
     navigate({
       to: '/location/$location',
       params: { location },
@@ -127,7 +117,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={!!txHash} onOpenChange={open => !open && handleClose()}>
       <DialogContent className='sm:max-w-md bg-black border-2 border-green-700 font-mono'>
         <DialogHeader className='text-center'>
           <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-green-700 bg-black'>

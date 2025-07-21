@@ -56,7 +56,7 @@ function App() {
         processedLocations.current.add(location);
       }
     });
-  }, [search.unlock, addDiscoveredLocation, ...locationQueries.map(q => q.status)]);
+  }, [search.unlock, addDiscoveredLocation, locationQueries]);
 
   return (
     <div className='min-h-screen bg-black text-green-400 font-mono'>
