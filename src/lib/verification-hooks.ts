@@ -17,9 +17,8 @@ export function useVerificationStatus(tapId: string, walletAddress: string | nul
     queryKey: ['verificationStatus', tapId, walletAddress],
     queryFn: () => checkVerificationStatus(tapId, walletAddress!),
     enabled: options?.enabled !== false && !!tapId && !!walletAddress,
-    staleTime: 30 * 1000, // 30 seconds
-    gcTime: 2 * 60 * 1000, // 2 minutes
     refetchInterval: 30 * 1000, // Refresh every 30 seconds
+    refetchOnWindowFocus: true,
   });
 }
 
