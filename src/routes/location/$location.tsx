@@ -24,7 +24,6 @@ function LocationPage() {
     queryKey: ['beerTaps', location],
     queryFn: async () => {
       const result = await fetchBeerTaps(location);
-      await new Promise(resolve => setTimeout(resolve, 1500));
       return result;
     },
   });
