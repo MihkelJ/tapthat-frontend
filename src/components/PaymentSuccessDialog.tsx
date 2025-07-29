@@ -20,12 +20,12 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
 
   const txHash = search.txHash;
 
-  const validatePayment = async (): Promise<PaymentSimple> => {
+  const validatePayment = async (): Promise<PaymentSimple | null> => {
     const sdk = new YappSDK();
     const payment = await sdk.getPayment(txHash as Hex);
 
     if (!payment) {
-      throw new Error('Payment not found');
+      return null; // This is a temporary fix to allow the user to retry the payment
     }
 
     const beerTap = beerTapsResponse.data.beerTaps.find(tap => tap.transactionMemo === payment.memo);
@@ -45,6 +45,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
   };
 
   const {
+    data: paymentData,
     isLoading,
     error,
     refetch: retryPaymentValidation,
@@ -52,7 +53,11 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
     queryKey: ['payment', txHash, retryCount],
     queryFn: validatePayment,
     enabled: !!txHash,
-    retry: 3,
+    retry: 20,
+    refetchInterval: (query) => {
+      const data = query.state.data;
+      return data === null ? 500 : false;
+    },
   });
 
   const { data: statusResponse } = useQuery({
@@ -121,7 +126,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
       <DialogContent className='sm:max-w-md bg-black border-2 border-green-700 font-mono'>
         <DialogHeader className='text-center'>
           <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-green-700 bg-black'>
-            {isLoading ? (
+            {isLoading || paymentData === null ? (
               <Terminal className='h-8 w-8 text-green-400 animate-pulse' />
             ) : error ? (
               <Shield className='h-8 w-8 text-green-400' />
@@ -130,10 +135,10 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
             )}
           </div>
           <DialogTitle className='text-xl text-green-400 tracking-wide'>
-            {isLoading ? 'INITIALIZING PAYMENT PROTOCOL...' : error ? 'AUTHENTICATION FAILED' : title?.toUpperCase()}
+            {isLoading || paymentData === null ? 'INITIALIZING PAYMENT PROTOCOL...' : error ? 'AUTHENTICATION FAILED' : title?.toUpperCase()}
           </DialogTitle>
           <DialogDescription className='text-sm text-green-300 mt-2'>
-            {isLoading
+            {isLoading || paymentData === null
               ? '> Initiating blockchain handshake protocol...'
               : error
                 ? `> CRITICAL ERROR: ${error.message}`
