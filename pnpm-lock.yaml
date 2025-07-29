@@ -45,8 +45,8 @@ importers:
         specifier: ^1.129.0
         version: 1.129.0(@tanstack/react-router@1.129.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(vite@7.0.5(@types/node@24.0.15)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3))
       '@yodlpay/yapp-sdk':
-        specifier: ^1.10.2
-        version: 1.10.2
+        specifier: ^1.10.3
+        version: 1.10.3
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1730,8 +1730,8 @@ packages:
   '@walletconnect/window-metadata@1.0.1':
     resolution: {integrity: sha512-9koTqyGrM2cqFRW517BPY/iEtUDx2r1+Pwwu5m7sJ7ka79wi3EyqhqcICk/yDmv6jAS1rjKgTKXlEhanYjijcA==}
 
-  '@yodlpay/yapp-sdk@1.10.2':
-    resolution: {integrity: sha512-YkpOnxmqlPEiPJRjXTr7+i/oRlj/EbKZ7JR3HjytQqWsxmUfr5WBGnWiVjaFk+Ur6/DTTFM1DS26G45ohcokUA==}
+  '@yodlpay/yapp-sdk@1.10.3':
+    resolution: {integrity: sha512-cWu+RaiLmUxGjJBtA5NFdDzhFSDW8mAqLiCEN4Zuh7cVYZMNz6yb153/E4MfMTv4mW/inrtTycCfoDSLyDVhFw==}
 
   abitype@1.0.8:
     resolution: {integrity: sha512-ZeiI6h3GnW06uYDLx0etQtX/p8E24UaHHBj57RSjK7YBFe7iuVn07EDpOeP451D06sF27VOz9JJPlIKJmXgkEg==}
@@ -7637,7 +7637,7 @@ snapshots:
       '@walletconnect/window-getters': 1.0.1
       tslib: 1.14.1
 
-  '@yodlpay/yapp-sdk@1.10.2':
+  '@yodlpay/yapp-sdk@1.10.3':
     dependencies:
       jose: 5.10.0
 

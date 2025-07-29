@@ -7,6 +7,9 @@ import YappSDK, { FiatCurrency } from '@yodlpay/yapp-sdk';
 import { Shield } from 'lucide-react';
 import { useState } from 'react';
 
+// Here we get the address of the app that will receive the webhook
+const TAP_THAT_APP_ADDRESS = '0x82dA383CC35a8e293743e94100A4Db5E9DC0D74D';
+
 interface PurchaseButtonProps {
   beerTap: PositiveResponse['get /v1/beer-taps']['data']['beerTaps'][number];
 }
@@ -46,6 +49,7 @@ export default function PurchaseButton({ beerTap }: PurchaseButtonProps) {
         currency: beerTap.transactionCurrency as FiatCurrency,
         memo: beerTap.transactionMemo,
         redirectUrl: `${origin}${pathname}`,
+        webhooks: [{ webhookAddress: TAP_THAT_APP_ADDRESS }],
       });
     }, 1000); // 1 second delay to show animation
   };
