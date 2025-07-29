@@ -52,7 +52,7 @@ export default function PaymentSuccessDialog({ location, beerTapsResponse }: Pay
     queryKey: ['payment', txHash, retryCount],
     queryFn: validatePayment,
     enabled: !!txHash,
-    retry: false,
+    retry: 3,
   });
 
   const { data: statusResponse } = useQuery({
