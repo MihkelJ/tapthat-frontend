@@ -58,16 +58,16 @@ export default function PurchaseButton({ beerTap }: PurchaseButtonProps) {
     return <ASCIIBeerAnimation />;
   }
 
-  if (!walletAddress) {
-    return (
-      <div className='space-y-2'>
-        <SimpleConnectWallet className='w-full' />
-        <div className='text-xs text-muted-foreground text-center'>Connect your wallet to purchase</div>
-      </div>
-    );
-  }
-
   if (requiresVerification && !verificationStatus?.data.isVerified) {
+    if (!walletAddress) {
+      return (
+        <div className='space-y-2'>
+          <SimpleConnectWallet className='w-full' />
+          <div className='text-xs text-muted-foreground text-center'>Connect your wallet to purchase</div>
+        </div>
+      );
+    }
+
     return (
       <div className='space-y-2'>
         <button
